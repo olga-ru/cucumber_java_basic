@@ -1,16 +1,21 @@
 package stepDefinitions;
 
+import com.sun.codemodel.JCase;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import io.restassured.response.ResponseBody;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-
-import java.util.List;
-import java.util.Map;
-
+import io.restassured.RestAssured;
+import io.restassured.http.Method;
+import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -21,85 +26,57 @@ public class SampleSteps {
         this.driver = Hooks.driver;
     }
 
-    @Given("^I am on the home page$")
-    public void iAmOnTheHomePage() throws Throwable {
-        driver.get("https://uljanovs.github.io/site");
+
+    @Given("^As a user I check base url$")
+    public void asAUserIMakeGetRequestWithOwners() {
+        RestAssured.baseURI = "http://localhost:9966/petclinic/";
+
     }
 
-    @Then("^I should see home page header$")
-    public void iShouldSeeHomePageHeader() throws Throwable {
-        assertEquals("This is a home page",
-                driver.findElement(By.cssSelector("h1")).getText());
+    @When("^As a user I test status code$")
+    public void asAUserIAddANewOwner() {
+        RequestSpecification httpRequest = RestAssured.given();
+        Response response = httpRequest.get("/api/owners/1");
+        int status = response.getStatusCode();
+        Assert.assertEquals(status, 200);
     }
 
-    @And("^I should see home page description$")
-    public void iShouldSeeHomePageDescription() throws Throwable {
-        assertEquals("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-                driver.findElement(By.cssSelector("p")).getText());
-    }
-    @Given("^I should see home page description like my wife$")
-    public void i_should_see_home_page_description_like_my_wife() throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-    }
-    @Given("^I should see Tamilla$")
-    public void i_should_see_Tamilla() throws Throwable {
-        driver.get("https://uljanovs.github.io/site/examples/age");
+    @And("^As a user I test header$")
+    public void asAUserIAddNewLastNameForOwner() {
+        RequestSpecification httpRequest = RestAssured.given();
+        Response response = httpRequest.get("/api/owners/1");
+        String contentType = response.header("content-type");
+        Assert.assertEquals(contentType, "application/json");
     }
 
-    @And("^I enter age: (\\d+)$")
-    public void iEnterAge(int age) throws Throwable {
-        driver.findElement(By.id("age")).sendKeys(String.valueOf(age));
+    @And("^As a user I test body$")
+    public void asAUserIAddNewOwnerId() {
+        RequestSpecification httpRequest = RestAssured.given();
+        Response response = httpRequest.get("/api/owners/1");
+
+        ResponseBody body = response.getBody();
+        String bodyAsString = body.asString();
+        Assert.assertTrue(bodyAsString.contains("George"));
     }
 
-    @Given("^I (?:am on|open) age page$")
-    public void iAmOnAgePage() throws Throwable {
-        driver.get("https://uljanovs.github.io/site/examples/age");
+
+   @Then("^As a user I add new pet$")
+    public void asAUserIDeleteNewOwner() {
+        RequestSpecification request = RestAssured.given();
+       JSONObject requestParams = new JSONObject();
+        requestParams.put("id", "27");
+       requestParams.put("name", "tiger");
+       request.header("content-type", "application/json");
+       request.body(requestParams.toJSONString());
+        Response response = request.post("/api/pettypes");
+
+       int statusCode = response.getStatusCode();
+       Assert.assertEquals(statusCode, 201);
+       String petName = response.jsonPath().get("name");
+       Assert.assertEquals( petName, "tiger");
+   }
+
+
     }
 
-    @And("^I click submit age$")
-    public void iClickSubmitAge() throws Throwable {
-        driver.findElement(By.id("submit")).click();
-    }
 
-    @Then("^I see message: \"([^\"]*)\"$")
-    public void iSeeMessage(String message) throws Throwable {
-        assertEquals(message, driver.findElement(By.id("message")).getText());
-    }
-
-    @When("^I enter values:$")
-    public void iEnterValues(Map<String, String> valuesToEnter) throws Throwable {
-        for (Map.Entry<String, String> e : valuesToEnter.entrySet()) {
-            driver.findElement(By.id(e.getKey())).clear();
-            driver.findElement(By.id(e.getKey())).sendKeys(e.getValue());
-            System.out.println("key is " + e.getKey());
-            System.out.println("value is " + e.getValue());
-        }
-    }
-
-    @And("^I should see menu$")
-    public void iShouldSeeMenu() throws Throwable {
-        assertTrue(driver.findElement(By.className("w3-navbar")).isDisplayed());
-    }
-
-    @And("^I click the result checkbox button$")
-    public void iClickTheResultCheckboxButton() throws Throwable {
-        driver.findElement(By.id("result_button_checkbox")).click();
-    }
-
-    @When("^I clicked on checkboxes:$")
-    public void iClickedOnCheckboxes(List<String> values) throws Throwable {
-        for (String value : values) {
-            driver.findElement(By.cssSelector("[value='" + value + "']")).click();
-        }
-    }
-
-    @Then("^message for checkboxes \"([^\"]*)\" is seen$")
-    public void messageForCheckboxesIsSeen(String message) throws Throwable {
-        assertEquals(message, driver.findElement(By.id("result_checkbox")).getText());
-    }
-
-    @Given("^I am on action page$")
-    public void iAmOnActionPage() {
-        driver.get("https://uljanovs.github.io/site/examples/actions");
-    }
-}
