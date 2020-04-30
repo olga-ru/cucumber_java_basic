@@ -6,4 +6,3 @@ Feature: testing web service
     And As a user I test header
     And As a user I test body
     Then As a user I add new pet
-git init
