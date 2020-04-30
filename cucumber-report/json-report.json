@@ -3,31 +3,10 @@
     "line": 1,
     "elements": [
       {
-        "line": 2,
-        "name": "",
-        "description": "",
-        "type": "background",
-        "keyword": "Background",
-        "steps": [
-          {
-            "result": {
-              "duration": 1309207700,
-              "status": "passed"
-            },
-            "line": 3,
-            "name": "I am on Google page",
-            "match": {
-              "location": "GoogleSteps.iAmOnActionPage()"
-            },
-            "keyword": "Given "
-          }
-        ]
-      },
-      {
         "before": [
           {
             "result": {
-              "duration": 9734494300,
+              "duration": 14461518300,
               "status": "passed"
             },
             "match": {
@@ -35,14 +14,14 @@
             }
           }
         ],
-        "line": 18,
-        "name": "As an end user I can search my favorite animals using the google",
+        "line": 3,
+        "name": "As a user I test API",
         "description": "",
-        "id": "as-an-end-user-i-need-a-google-search-feature-for-all-animals-i-like;as-an-end-user-i-can-search-my-favorite-animals-using-the-google;;2",
+        "id": "testing-web-service;as-a-user-i-test-api",
         "after": [
           {
             "result": {
-              "duration": 707936600,
+              "duration": 946722500,
               "status": "passed"
             },
             "match": {
@@ -51,158 +30,81 @@
           }
         ],
         "type": "scenario",
-        "keyword": "Scenario Outline",
+        "keyword": "Scenario",
         "steps": [
           {
             "result": {
-              "duration": 96892800,
+              "duration": 929674300,
               "status": "passed"
             },
-            "line": 7,
-            "name": "I enter: \"frog\" in search field",
+            "line": 4,
+            "name": "As a user I check base url",
             "match": {
-              "arguments": [
-                {
-                  "val": "frog",
-                  "offset": 10
-                }
-              ],
-              "location": "GoogleSteps.iEnterName(String)"
-            },
-            "matchedColumns": [
-              0
-            ],
-            "keyword": "When "
-          },
-          {
-            "result": {
-              "duration": 1724407500,
-              "status": "passed"
-            },
-            "line": 8,
-            "name": "I search",
-            "match": {
-              "location": "GoogleSteps.iClickGoogleSearch()"
-            },
-            "keyword": "And "
-          },
-          {
-            "result": {
-              "duration": 26978600,
-              "status": "passed"
-            },
-            "line": 9,
-            "name": "I see results",
-            "match": {
-              "location": "GoogleSteps.iSeeResultIsNotEmpty()"
-            },
-            "keyword": "Then "
-          }
-        ]
-      },
-      {
-        "line": 2,
-        "name": "",
-        "description": "",
-        "type": "background",
-        "keyword": "Background",
-        "steps": [
-          {
-            "result": {
-              "duration": 1227118300,
-              "status": "passed"
-            },
-            "line": 3,
-            "name": "I am on Google page",
-            "match": {
-              "location": "GoogleSteps.iAmOnActionPage()"
+              "location": "SampleSteps.asAUserIMakeGetRequestWithOwners()"
             },
             "keyword": "Given "
-          }
-        ]
-      },
-      {
-        "before": [
+          },
           {
             "result": {
-              "duration": 9191221800,
+              "duration": 1760454100,
               "status": "passed"
             },
+            "line": 5,
+            "name": "As a user I test status code",
             "match": {
-              "location": "Hooks.openBrowser()"
-            }
-          }
-        ],
-        "line": 19,
-        "name": "As an end user I can search my favorite animals using the google",
-        "description": "",
-        "id": "as-an-end-user-i-need-a-google-search-feature-for-all-animals-i-like;as-an-end-user-i-can-search-my-favorite-animals-using-the-google;;3",
-        "after": [
-          {
-            "result": {
-              "duration": 693228100,
-              "status": "passed"
+              "location": "SampleSteps.asAUserIAddANewOwner()"
             },
-            "match": {
-              "location": "Hooks.embedScreenshot(Scenario)"
-            }
-          }
-        ],
-        "type": "scenario",
-        "keyword": "Scenario Outline",
-        "steps": [
-          {
-            "result": {
-              "duration": 92978600,
-              "status": "passed"
-            },
-            "line": 7,
-            "name": "I enter: \"pig\" in search field",
-            "match": {
-              "arguments": [
-                {
-                  "val": "pig",
-                  "offset": 10
-                }
-              ],
-              "location": "GoogleSteps.iEnterName(String)"
-            },
-            "matchedColumns": [
-              0
-            ],
             "keyword": "When "
           },
           {
             "result": {
-              "duration": 1619200400,
+              "duration": 31388200,
               "status": "passed"
             },
-            "line": 8,
-            "name": "I search",
+            "line": 6,
+            "name": "As a user I test header",
             "match": {
-              "location": "GoogleSteps.iClickGoogleSearch()"
+              "location": "SampleSteps.asAUserIAddNewLastNameForOwner()"
             },
             "keyword": "And "
           },
           {
             "result": {
-              "duration": 22139300,
+              "duration": 72049300,
               "status": "passed"
             },
-            "line": 9,
-            "name": "I see results",
+            "line": 7,
+            "name": "As a user I test body",
             "match": {
-              "location": "GoogleSteps.iSeeResultIsNotEmpty()"
+              "location": "SampleSteps.asAUserIAddNewOwnerId()"
             },
-            "keyword": "Then "
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 1156698600,
+              "status": "passed"
+            },
+            "line": 8,
+            "name": "As a user I add new pet",
+            "match": {
+              "location": "SampleSteps.asAUserIDeleteNewOwner()"
+            },
+            "keyword": "And "
+          }
+        ],
+        "tags": [
+          {
+            "line": 2,
+            "name": "@test1"
           }
         ]
       }
     ],
-    "name": "As an end user I need a Google search feature for all Animals I like",
+    "name": "testing web service",
     "description": "",
-    "id": "as-an-end-user-i-need-a-google-search-feature-for-all-animals-i-like",
+    "id": "testing-web-service",
     "keyword": "Feature",
-    "uri": "Activity_2.feature"
+    "uri": "PetClinic.feature"
   }
 ]

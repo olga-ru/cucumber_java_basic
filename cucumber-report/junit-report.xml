@@ -1,16 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?><testsuite failures="0" name="cucumber.runtime.formatter.JUnitFormatter" skipped="0" tests="2" time="26.445805">
-<testcase classname="As an end user I need a Google search feature for all Animals I like" name="As an end user I can search my favorite animals using the google" time="13.599918">
-<system-out><![CDATA[Given I am on Google page...................................................passed
-When I enter: "frog" in search field........................................passed
-And I search................................................................passed
-Then I see results..........................................................passed
-]]></system-out>
-</testcase>
-<testcase classname="As an end user I need a Google search feature for all Animals I like" name="As an end user I can search my favorite animals using the google 2" time="12.845887">
-<system-out><![CDATA[Given I am on Google page...................................................passed
-When I enter: "pig" in search field.........................................passed
-And I search................................................................passed
-Then I see results..........................................................passed
+<?xml version="1.0" encoding="UTF-8"?><testsuite failures="0" name="cucumber.runtime.formatter.JUnitFormatter" skipped="0" tests="1" time="19.358505">
+<testcase classname="testing web service" name="As a user I test API" time="19.358505">
+<system-out><![CDATA[Given As a user I check base url............................................passed
+When As a user I test status code...........................................passed
+And As a user I test header.................................................passed
+And As a user I test body...................................................passed
+And As a user I add new pet.................................................passed
 ]]></system-out>
 </testcase>
 </testsuite>
